@@ -36,6 +36,10 @@ h5, h6, code, p {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
+p {
+  padding-left: 2px;
+}
+
 code {
   color: var(--dark);
 }
@@ -174,6 +178,12 @@ input {
 input:focus, input:hover {
   outline: none;
   border: solid 1px;
+}
+
+input:required:valid {
+  outline: none;
+  border: solid 1px;
+  background-color: var(--grey);
 }
 
 form button {
