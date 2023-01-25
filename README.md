@@ -1,4 +1,6 @@
-# Notion-Clone
+# Notion-Clone (BOLD)
+
+It just a Notion Alternative i made.
 
 1. `npm install webpack --save-dev`
 
@@ -24,3 +26,28 @@ module.exports = {
 ```
 
 7. `npm run build`
+
+8. dynamic import (code splittings)
+
+```
+const path = require('path');
+
+module.exports = {
+
+  mode: 'development',
+  entry: {
+    index: './view/index.js',
+    doc: './view/doc.js',
+    // add a file each time necessory
+    firestore: 'firebase/firestore',
+    auth: 'firebase/auth'
+  },
+   output: {
+    filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+
+};
+```
+
+9. `npm run start` for devepolment temp build
