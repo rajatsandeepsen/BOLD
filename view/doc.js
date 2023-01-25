@@ -13,10 +13,11 @@ export const todo = class {
         (async () => {
             const querySnapshot = await getDocs(qry);
             querySnapshot.forEach((doc) => {
-                this.todoArray.push(doc.data())
-            
+                //here destructuring is used to add id to the object
+                this.todoArray.push({...doc.data(),id: doc.id})
             })
             this.displayTodo()
+            console.log(this.todoArray)
         })();
         
 
@@ -40,7 +41,7 @@ export const todo = class {
 
         addDoc(this.TODO, X)
         .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
+            location.reload(); 
         }).catch((error) => {
             console.error("Error adding document: ", error);
         })
@@ -49,6 +50,7 @@ export const todo = class {
 
     displayTodo() {
         let container = document.getElementById("container");
+        container.innerHTML = "";
         this.todoArray.forEach((data) => {
             container.innerHTML += this.TempleteTodo(data);
         })
@@ -57,8 +59,8 @@ export const todo = class {
         if (data.type === "todo"){
             let btnstyle = data.done ? "bi-check-square-fill" : "bi-square";
             let text = data.done ? "text-decoration-line-through text-black-50" : "";
-            return `<div id="${data.ID}" class="shadow-lg bg-white p-3 d-flex gap-2 align-items-center">
-                <button class="btn" onclick="todo.deleteTodo('${data.id}')"><i class="bi ${btnstyle} onpageI"></i></button>
+            return `<div id="${data.id}" class="shadow-lg bg-white p-3 d-flex gap-2 align-items-center">
+                <button class="btn" onclick="deleteTodo('${data.id}')"><i class="bi ${btnstyle} onpageI"></i></button>
                 <h6 class=${text}>${data.text}</h6>
             </div>`;
         }
@@ -86,7 +88,7 @@ export const todo = class {
         else return `<div class="shadow-lg bg-white p-3"><h6>Something went wrong</h6></div>`
     }
     static deleteTodo(ID) {
-        let docRef = doc(DB, TODO, ID)
+        let docRef = doc(DB, this.TODO, ID)
         updateDoc(docRef, {
           done: true
         })
