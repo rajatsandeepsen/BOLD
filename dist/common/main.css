@@ -148,22 +148,12 @@ a, .btn-dark {
   background-color: var(--grey) !important;
 }
 
-.fs-7 {
-  font-weight: lighter !important;
-  font-size: 0.9rem !important;
-}
-
-#INPUT {
+#textInput {
   width: 100vw;
   position: fixed;
   bottom: 1rem;
   left: 0;
   padding: 0 1rem;
-}
-
-#dummyINPUT {
-  visibility: hidden;
-  margin-bottom: 1rem;
 }
 
 input {

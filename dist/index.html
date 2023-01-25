@@ -38,16 +38,17 @@
         </form>
     </div>
     <div id="container" class="container flex-column gap-2 mb-5" style="display: none;">
-        <div>
-            <form class="d-flex flex-column gap-2" id="INPUT">
-
+    </div>
+            <form id="textInput">
+                <input type="radio" value="link" name="choice" class="d-none"  checked="checked">
+                <div class="d-flex flex-column gap-2">
                 <div class="d-flex gap-2 justify-content-start choice">
                     <div>
-                        <input type="radio" value="todo" id="todobtn" name="choice" />
+                        <input type="radio" value="todo" id="todobtn" name="choice" >
                         <label class="btn" for="todobtn"><i class="bi bi-check-square "></i></label>
                     </div>
                     <div>
-                        <input type="radio" value="note" id="notebtn" name="choice" />
+                        <input type="radio" value="note" id="notebtn" name="choice" >
                         <label class="btn" for="notebtn"><i class="bi bi-file-earmark "></i></label>
                     </div>
                 </div>
@@ -59,9 +60,10 @@
                         <i class="bi bi-cloud-arrow-up-fill "></i>
                     </button>
                 </div>
+                </div>
             </form>
-        </div>
-    </div>
+        
+    
     <script type="module" src="../view/index.js"></script>
 </body>
 </html>

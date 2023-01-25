@@ -6,7 +6,7 @@ export const todo = class {
     constructor(DB) {
         
         this.TODO = collection(DB, "NotionFeed");
-        const qry = query(TODO, orderBy('timeStamp', "desc"));
+        const qry = query(this.TODO, orderBy('timeStamp', "desc"));
         this.todoArray = [];
 
         //using IIAFE because constructor cannot be async
@@ -20,16 +20,7 @@ export const todo = class {
         })();
         
 
-        const INPUT = document.getElementById("INPUT");
-        console.log('input doc')
-        INPUT.addEventListener('submit', (e) => {
-            e.preventDefault();
-            let value = INPUT.value.value;
-            let type = INPUT.choise.value || "link";
-            this.addTodo(value,type);
-            INPUT.reset();
-            console.log('input successfull')
-        })
+        
     }
 
 
@@ -63,12 +54,11 @@ export const todo = class {
         })
     }
     TempleteTodo(data){
-        console.log(data)
         if (data.type === "todo"){
             let btnstyle = data.done ? "bi-check-square-fill" : "bi-square";
             let text = data.done ? "text-decoration-line-through text-black-50" : "";
             return `<div id="${data.ID}" class="shadow-lg bg-white p-3 d-flex gap-2 align-items-center">
-                <button class="btn" onclick="todo.deleteTodo(${data.id})"><i class="bi ${btnstyle} onpageI"></i></button>
+                <button class="btn" onclick="todo.deleteTodo('${data.id}')"><i class="bi ${btnstyle} onpageI"></i></button>
                 <h6 class=${text}>${data.text}</h6>
             </div>`;
         }
@@ -76,7 +66,7 @@ export const todo = class {
             return `<div class="shadow-lg bg-white p-3">
                 <div class="d-flex align-items-center justify-content-between">
                     <code>${data.text}</code>
-                    <button class="btn" onclick="navigator.clipboard.writeText(${data.text})"><i class="bi bi-clipboard onpageI"></i></button>
+                    <button class="btn" onclick="navigator.clipboard.writeText('${data.text}')"><i class="bi bi-clipboard onpageI"></i></button>
                 </div>
             </div>`;
         }
@@ -88,7 +78,7 @@ export const todo = class {
             return `<div class="shadow-lg bg-white p-3">
                 <div class="d-flex align-items-center justify-content-between">
                     <h6>${header}</h6>
-                    <button class="btn" onclick="navigator.clipboard.writeText(${data.text})"><i class="bi bi-clipboard onpageI"></i></button>
+                    <button class="btn" onclick="navigator.clipboard.writeText('${data.text}')"><i class="bi bi-clipboard onpageI"></i></button>
                 </div>
                 <code>${paragraph}</code>
             </div>`;

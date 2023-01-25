@@ -28,19 +28,27 @@ const DB  = getFirestore();
 
 const login = document.getElementById("loginPAGE");
 const container = document.getElementById("container");
-
+const textInput = document.getElementById("textInput");
+let todoObj;
 onAuthStateChanged(auth, user => {
     if (user) {
-        console.log("user logged in")
         login.style.display = "none";
         container.style.display = "flex";
+        textInput.style.display = "block";
 
         import('./doc.js')
         .then((res) => { 
-                new res.todo(DB)
-                alert("construtor ivoked")
-                
+                todoObj = new res.todo(DB)
             })
+            
+        textInput.addEventListener('submit', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            let value = textInput.textfield.value;
+            let type = document.querySelector('input[name="choice"]:checked').value;
+            todoObj.addTodo(value,type);
+            textInput.reset();
+        })
 
         import('https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js').then(({ signOut }) => {
             const logOUT = document.getElementById("logOUT");
@@ -57,9 +65,9 @@ onAuthStateChanged(auth, user => {
         })
     }
     else {
-        console.log("user not logged in")
         login.style.display = "flex";
         container.style.display = "none";
+        textInput.style.display = "none";
         const loginFORM = document.getElementById("loginFORM");
 
         // dynamic import 
