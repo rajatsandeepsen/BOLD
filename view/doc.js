@@ -3,15 +3,20 @@ import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic
 export const todo = class {
     todoArray = [];
     TODO;
+    DB;
+    qry;
     constructor(DB) {
-        
+        this.DB = DB
         this.TODO = collection(DB, "NotionFeed");
-        const qry = query(this.TODO, orderBy('timeStamp', "desc"));
+        this.qry = query(this.TODO, orderBy('timeStamp', "desc"));
+        this.refresh()
+    }
+    refresh() {
         this.todoArray = [];
 
         //using IIAFE because constructor cannot be async
         (async () => {
-            const querySnapshot = await getDocs(qry);
+            const querySnapshot = await getDocs(this.qry);
             querySnapshot.forEach((doc) => {
                 //here destructuring is used to add id to the object
                 this.todoArray.push({...doc.data(),id: doc.id})
@@ -19,8 +24,6 @@ export const todo = class {
             this.displayTodo()
             console.log(this.todoArray)
         })();
-        
-
         
     }
 
@@ -41,7 +44,7 @@ export const todo = class {
 
         addDoc(this.TODO, X)
         .then((docRef) => {
-            location.reload(); 
+            this.refresh()
         }).catch((error) => {
             console.error("Error adding document: ", error);
         })
