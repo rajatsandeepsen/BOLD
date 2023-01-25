@@ -44,8 +44,10 @@ onAuthStateChanged(auth, user => {
         import('./doc.js')
         .then((res) => { 
                 todoObj = new res.todo(DB)
-                // var deleteTodo = todoObj.deleteTodo
+                
             })
+        .catch(err => console.log(err.message))
+
             
         textInput.addEventListener('submit', e => {
             e.preventDefault();
@@ -55,6 +57,9 @@ onAuthStateChanged(auth, user => {
             todoObj.addTodo(value,type);
             textInput.reset();
         })
+
+        // dynamic import
+        
 
         import('https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js').then(({ signOut }) => {
             const logOUT = document.getElementById("logOUT");

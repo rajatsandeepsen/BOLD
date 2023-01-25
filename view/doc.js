@@ -1,13 +1,13 @@
-import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore-lite.js";
-
+import { collection, addDoc, getDocs, query, orderBy, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore-lite.js";
+let DBclone, TODOclone
 export const todo = class {
     todoArray = [];
     TODO;
     DB;
     qry;
     constructor(DB) {
-        this.DB = DB
-        this.TODO = collection(DB, "NotionFeed");
+        this.DB = DBclone = DB
+        this.TODO = TODOclone = collection(DB, "NotionFeed");
         this.qry = query(this.TODO, orderBy('timeStamp', "desc"));
         this.refresh()
     }
@@ -22,7 +22,15 @@ export const todo = class {
                 this.todoArray.push({...doc.data(),id: doc.id})
             })
             this.displayTodo()
-            console.log(this.todoArray)
+            const deleteBtn = document.querySelectorAll('.delete');
+            deleteBtn.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    let id = e.target.parentElement.parentElement.id;
+                    console.log(id)
+                    this.deleteTodo(id.toString());
+                })
+            })
         })();
 
     }
@@ -51,6 +59,8 @@ export const todo = class {
     }
 
 
+
+
     displayTodo() {
         let container = document.getElementById("container");
         container.innerHTML = "";
@@ -58,12 +68,16 @@ export const todo = class {
             container.innerHTML += this.TempleteTodo(data);
         })
     }
+
+
+
     TempleteTodo(data){
         if (data.type === "todo"){
-            let btnstyle = data.done ? "bi-check-square-fill" : "bi-square";
+            let icon = data.done ? "bi-check-square-fill" : "bi-square";
+            let btnstyle = data.done ? "btn" : "btn delete";
             let text = data.done ? "text-decoration-line-through" + " " + "text-black-50" : "";
-            return `<div id="${data.id}" class="shadow-lg bg-white p-2 d-flex gap-2 align-items-center">
-                <button class="btn" onclick="deleteTodo('${data.id}')"><i class="bi ${btnstyle} onpageI"></i></button>
+            return `<div id=${data.id} class="shadow-lg bg-white p-2 d-flex gap-2 align-items-center">
+                <button class="${btnstyle}"><i class="bi ${icon} onpageI"></i></button>
                 <h6 class="${text}">${data.text}</h6>
             </div>`;
         }
@@ -96,20 +110,24 @@ export const todo = class {
         }
         else return `<div class="shadow-lg bg-white p-3"><h6>Something went wrong</h6></div>`
     }
-    static deleteTodo(ID) {
-        let docRef = doc(DB, this.TODO, ID)
+
+
+    static copytext(text) {
+         navigator.clipboard.writeText(text);
+    }
+
+
+    deleteTodo(ID) {
+        let docRef = doc(this.DB, "NotionFeed" ,ID)
         updateDoc(docRef, {
           done: true
         })
         .then(() => {
-            console.log("Document successfully updated!");
+            this.refresh();
         })
         .catch((error) => {
             console.error("Error updating document: ", error);
         })
-    }
-    static copytext(text) {
-         navigator.clipboard.writeText(text);
     }
     
 }
