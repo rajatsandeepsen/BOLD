@@ -30,6 +30,11 @@ const login = document.getElementById("loginPAGE");
 const container = document.getElementById("container");
 const textInput = document.getElementById("textInput");
 let todoObj;
+function deleteTodo(id) {
+    todoObj.deleteTodo(id);
+}
+// let deleteTodo = () => {};
+
 onAuthStateChanged(auth, user => {
     if (user) {
         login.style.display = "none";
@@ -39,6 +44,7 @@ onAuthStateChanged(auth, user => {
         import('./doc.js')
         .then((res) => { 
                 todoObj = new res.todo(DB)
+                // var deleteTodo = todoObj.deleteTodo
             })
             
         textInput.addEventListener('submit', e => {

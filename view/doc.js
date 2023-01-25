@@ -24,7 +24,7 @@ export const todo = class {
             this.displayTodo()
             console.log(this.todoArray)
         })();
-        
+
     }
 
 
@@ -61,16 +61,22 @@ export const todo = class {
     TempleteTodo(data){
         if (data.type === "todo"){
             let btnstyle = data.done ? "bi-check-square-fill" : "bi-square";
-            let text = data.done ? "text-decoration-line-through text-black-50" : "";
-            return `<div id="${data.id}" class="shadow-lg bg-white p-3 d-flex gap-2 align-items-center">
+            let text = data.done ? "text-decoration-line-through" + " " + "text-black-50" : "";
+            return `<div id="${data.id}" class="shadow-lg bg-white p-2 d-flex gap-2 align-items-center">
                 <button class="btn" onclick="deleteTodo('${data.id}')"><i class="bi ${btnstyle} onpageI"></i></button>
-                <h6 class=${text}>${data.text}</h6>
+                <h6 class="${text}">${data.text}</h6>
             </div>`;
         }
         else if (data.type === "link"){
+            function urlify(text) {
+                var urlRegex = /(https?:\/\/[^\s]+)/g;
+                return text.replace(urlRegex, function(url) {
+                    return '<a href="' + url + '">' + url + '</a>';
+                })
+            }
             return `<div class="shadow-lg bg-white p-3">
                 <div class="d-flex align-items-center justify-content-between">
-                    <code>${data.text}</code>
+                    <code>${urlify(data.text)}</code>
                     <button class="btn" onclick="navigator.clipboard.writeText('${data.text}')"><i class="bi bi-clipboard onpageI"></i></button>
                 </div>
             </div>`;

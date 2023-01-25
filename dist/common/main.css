@@ -6,6 +6,7 @@
   --dark:#24292f;
   --dark-50:#17181c;
   --boxer: 48px;
+  --blue: #0366d6;
 }
 
 i {
@@ -138,7 +139,7 @@ html::-webkit-scrollbar {
   border-radius: 13px !important;
 }
 
-a, .btn-dark {
+.btn-dark {
   text-decoration: none;
   border: 0;
   background-color: transparent;
@@ -148,9 +149,18 @@ a, .btn-dark {
   background-color: var(--grey) !important;
 }
 
+a {
+  word-wrap: break-word;
+  color: var(--dark);
+  font-weight: bold;
+  -webkit-text-decoration-color: var(--blue);
+          text-decoration-color: var(--blue);
+}
+
 #textInput {
   width: 100vw;
   position: fixed;
+  z-index: 80;
   bottom: 1rem;
   left: 0;
   padding: 0 1rem;
@@ -160,20 +170,20 @@ input {
   min-width: 100%;
   padding-left: 10px;
   min-height: var(--boxer);
+  background-color: var(--white);
   color: var(--dark);
-  border: dashed 1px var(--dark);
+  border: solid 0px var(--dark);
   border-radius: 6px;
+  box-shadow: 5px 5px 17px #dbdbdb, -5px -5px 17px #ffffff !important;
   transition: all 0.4s;
 }
 input:focus, input:hover {
   outline: none;
-  border: solid 1px;
 }
 
 input:required:valid {
   outline: none;
-  border: solid 1px;
-  background-color: var(--grey);
+  border: solid var(--dark) 1px;
 }
 
 form button {
@@ -204,17 +214,14 @@ h5, h6 {
   height: var(--boxer);
   position: relative;
 }
-.choice label {
+.choice label, .choice .label {
   cursor: pointer;
   z-index: 90;
   background: var(--white);
 }
-.choice label i {
+.choice label i, .choice .label i {
   font-size: 1.4rem;
   color: var(--dark);
-}
-.choice label :hover {
-  background: var(--dark-50);
 }
 .choice input[type=radio]:checked + label {
   background: var(--dark);
@@ -222,7 +229,7 @@ h5, h6 {
 .choice input[type=radio]:checked + label i {
   color: var(--white);
 }
-.choice label, .choice input {
+.choice label, .choice .label, .choice input {
   width: 100%;
   height: 100%;
   display: block;
@@ -231,4 +238,10 @@ h5, h6 {
 .choice input[type=radio] {
   opacity: 0;
   z-index: 100;
+}
+
+@media (min-width: 700px) {
+  .choice div {
+    width: calc(var(--boxer) * 3);
+  }
 }/*# sourceMappingURL=main.css.map */
