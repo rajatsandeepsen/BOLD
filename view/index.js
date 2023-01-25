@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js';
 
 
 const firebaseConfig = {
@@ -19,8 +19,11 @@ initializeApp(firebaseConfig);
 // const storage = getStorage();
 
 // firebase auth
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';
+import { todo } from './doc.js';
 const auth = getAuth();
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore-lite.js";
+const DB  = getFirestore();
 
 
 const login = document.getElementById("loginPAGE");
@@ -32,7 +35,14 @@ onAuthStateChanged(auth, user => {
         login.style.display = "none";
         container.style.display = "flex";
 
-        import('firebase/auth').then(({ signOut }) => {
+        import('./doc.js')
+        .then((res) => { 
+                new res.todo(DB)
+                alert("construtor ivoked")
+                
+            })
+
+        import('https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js').then(({ signOut }) => {
             const logOUT = document.getElementById("logOUT");
             logOUT.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -53,7 +63,7 @@ onAuthStateChanged(auth, user => {
         const loginFORM = document.getElementById("loginFORM");
 
         // dynamic import 
-        import('firebase/auth').then(({ signInWithEmailAndPassword }) => {
+        import('https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js').then(({ signInWithEmailAndPassword }) => {
             loginFORM.addEventListener('submit', (e) => {
                 e.preventDefault();
                 let email = loginFORM.email.value;

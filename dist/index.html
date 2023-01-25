@@ -38,49 +38,30 @@
         </form>
     </div>
     <div id="container" class="container flex-column gap-2 mb-5" style="display: none;">
-        <div id="currentTODO" class="shadow-lg bg-white p-3 d-flex gap-2 align-items-center">
-            <button  class="btn"><i class="bi bi-square onpageI"></i></button>
-            <!-- <i class="bi bi-check-square-fill"></i> -->
-            <h6 class="text-decoration-line-through text-black-50">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
-        </div>
-        <h6 class="date">20-20-20</h6>
-        <div class="shadow-lg bg-white p-3">
-            <div class="d-flex align-items-center justify-content-between">
-                <code>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, dicta.</code>
-                <button class="btn"><i class="bi bi-clipboard onpageI"></i></button>
-            </div>
-        </div>
-        
-        <div id="currentTODO" class="shadow-lg bg-white p-3">
-            <div class="d-flex align-items-center justify-content-between">
-                <h6>Lorem ipsum dolor sit amet </h6>
-                <button class="btn"><i class="bi bi-clipboard onpageI"></i></button>
-            </div>
-            <code>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat reiciendis cupiditate exercitationem temporibus quas a omnis dolore necessitatibus culpa?</code>
-            <!-- <i class="bi bi-check-square-fill"></i> -->
-        </div>
-        <div id="INPUT">
-            <form class="d-flex flex-column gap-2">
+        <div>
+            <form class="d-flex flex-column gap-2" id="INPUT">
 
-                <div class="d-flex gap-2 justify-content-start">
-                    <button class="btn bg-dark">
-                        <i class="bi bi-check-square "></i>
-                    </button>
-                    <button class="btn bg-dark">
-                        <i class="bi bi-file-earmark "></i>
-                    </button>
+                <div class="d-flex gap-2 justify-content-start choice">
+                    <div>
+                        <input type="radio" value="todo" id="todobtn" name="choice" />
+                        <label class="btn" for="todobtn"><i class="bi bi-check-square "></i></label>
+                    </div>
+                    <div>
+                        <input type="radio" value="note" id="notebtn" name="choice" />
+                        <label class="btn" for="notebtn"><i class="bi bi-file-earmark "></i></label>
+                    </div>
                 </div>
                 <div class="d-flex gap-2 align-items-center">
                     <div class="flex-grow-1 bg-white">
-                        <input type="text" name="" id="" required>
+                        <input type="text" name="textfield" required>
                     </div>
-                    <button class="btn bg-dark">
+                    <button type="submit" class="btn bg-dark">
                         <i class="bi bi-cloud-arrow-up-fill "></i>
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <script type="module" src="index.bundle.js"></script>
+    <script type="module" src="../view/index.js"></script>
 </body>
 </html>

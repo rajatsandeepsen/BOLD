@@ -201,3 +201,40 @@ h5,h6 {
 #loginPAGE {
     max-width: 400px;
 }
+
+.choice {
+    &  div {
+            width: var(--boxer);
+            height: var(--boxer);
+            position: relative;
+        }
+    &  label {
+            cursor: pointer;
+            z-index: 90;
+            background: var(--white);
+            & i {
+                font-size: 1.4rem;
+                color: var(--dark);
+            }
+            & :hover {
+                background: var(--dark-50);
+            }
+        }
+    &  input[type="radio"]:checked + label {
+            background: var(--dark);
+            & i {
+                color: var(--white);
+            }
+        }
+    &  label,
+    &  input {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+    }
+    &  input[type="radio"] {
+        opacity: 0;
+        z-index: 100;
+    }
+}
