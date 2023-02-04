@@ -49,3 +49,15 @@ function log(hi) {
 }
 const boundLog = log.bind();
 boundLog(10);
+
+
+
+//formData used for loading data from html inputs or to create a new form
+const formData = new FormData(SUBMITFORM);
+formData.delete('terms');//to delete entite input field
+let data = {};
+for (const [key, value] of formData.entries()) {
+    data[key] = value;
+}
+data["TimeStamp"] = Date.now();
+console.log(data)
