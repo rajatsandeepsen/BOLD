@@ -76,3 +76,16 @@ console.log(Employee);// doe only print
 if (Employee.firstname === undefined) //you can use undefined as keyword
   console.log('he');
 // Expected output: undefined
+
+
+
+
+
+// null & undefined
+Employee.firstname = null // or we can give undefined as value
+if (Employee.firstname == undefined) // return true
+if (Employee.firstname === undefined) // return false
+    
+    
+
+
