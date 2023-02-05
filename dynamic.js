@@ -61,3 +61,18 @@ for (const [key, value] of formData.entries()) {
 }
 data["TimeStamp"] = Date.now();
 console.log(data)
+
+
+
+
+//delete a entity from object
+const Employee = {
+  firstname: 'John',
+  lastname: 'Doe'
+};
+delete Employee.firstname; // delete the key and value together
+console.log(Employee);// doe only print
+
+if (Employee.firstname === undefined) //you can use undefined as keyword
+  console.log('he');
+// Expected output: undefined
