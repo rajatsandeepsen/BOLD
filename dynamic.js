@@ -96,3 +96,21 @@ data["TimeStamp"] = Date.now();
 // object destructuring
 let newData ={...data, TimeStamp: Date.now()}
 
+
+
+
+// multi page value passing
+// receiver end
+console.log(window.location.href)
+let url = window.location.href.split('/')
+let id = url[url.length - 1].slice(1)
+const docRef = document.getElementById('docRef')
+docRef.innerHTML = `Your Document ID is <span class="fw-bolder">${id}</span>`
+console.log(id)
+
+// senter end
+let URL = "./success/#" + docRef.id;// result will be ./success/index.html/#1234567
+setTimeout(() => {
+    window.location.replace(URL);
+    //or window.location.href = URL;
+}, 2500);
