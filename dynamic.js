@@ -88,4 +88,11 @@ if (Employee.firstname === undefined) // return false
     
     
 
+// object
+data.TimeStamp = Date.now();
+data["TimeStamp"] = Date.now();
+// both are same
+
+// object destructuring
+let newData ={...data, TimeStamp: Date.now()}
 
