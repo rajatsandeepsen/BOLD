@@ -40,10 +40,10 @@ onAuthStateChanged(auth, user => {
         login.style.display = "none";
         container.style.display = "flex";
         textInput.style.display = "block";
-
+        
         import('./doc.js')
         .then((res) => { 
-                todoObj = new res.todo(DB)
+                todoObj = new res.todo(DB, user.uid)
                 
             })
         .catch(err => console.log(err.message))

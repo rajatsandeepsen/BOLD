@@ -9,14 +9,38 @@
   --blue: #0366d6;
 }
 
+.img-doc {
+  box-sizing: border-box;
+  overflow: auto;
+  width: 100%;
+  height: 300px;
+}
+.img-doc img {
+  width: auto;
+  min-height: 100%;
+}
+
+@media (max-width: 768px) {
+  .img-doc {
+    overflow-y: scroll;
+    max-height: 500px;
+  }
+  .img-doc img {
+    width: 100%;
+    height: auto;
+  }
+}
 i {
   transition: 0.4s ease all;
-  color: var(--dark);
 }
 
 .onpageI {
   color: var(--dark);
   font-size: 1.3rem;
+  transition: 0.4s ease all;
+}
+.onpageI:hover .onpageI {
+  color: var(--grey) !important;
 }
 
 @media (max-width: 768px) {
@@ -155,6 +179,13 @@ a {
   font-weight: bold;
   -webkit-text-decoration-color: var(--blue);
           text-decoration-color: var(--blue);
+}
+a i {
+  color: var(--dark);
+  font-size: 1.3rem;
+}
+a :hover i {
+  color: var(--blue);
 }
 
 #textInput {

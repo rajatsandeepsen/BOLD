@@ -5,9 +5,11 @@ export const todo = class {
     TODO;
     DB;
     qry;
-    constructor(DB) {
-        this.DB = DBclone = DB
-        this.TODO = TODOclone = collection(DB, "NotionFeed");
+    userCollection;
+    constructor(DB, UID) {
+        this.DB = DBclone = DB;
+        this.userCollection = UID;
+        this.TODO = TODOclone = collection(DB, UID);
         this.qry = query(this.TODO, orderBy('timeStamp', "desc"));
         this.refresh()
     }
@@ -27,7 +29,6 @@ export const todo = class {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     let id = e.target.parentElement.parentElement.id;
-                    console.log(id)
                     this.deleteTodo(id.toString());
                 })
             })
@@ -63,7 +64,7 @@ export const todo = class {
 
     displayTodo() {
         let container = document.getElementById("container");
-        container.innerHTML = "";
+        // container.innerHTML = "";
         this.todoArray.forEach((data) => {
             container.innerHTML += this.TempleteTodo(data);
         })
@@ -72,7 +73,9 @@ export const todo = class {
 
 
     TempleteTodo(data){
-        if (data.type === "todo"){
+        if (data.type === "todo" && ((Date.now() - data.timeStamp < 86400000) || !data.done )){
+
+
             let icon = data.done ? "bi-check-square-fill" : "bi-square";
             let btnstyle = data.done ? "btn" : "btn delete";
             let text = data.done ? "text-decoration-line-through" + " " + "text-black-50" : "";
@@ -81,11 +84,11 @@ export const todo = class {
                 <h6 class="${text}">${data.text}</h6>
             </div>`;
         }
-        else if (data.type === "link"){
+        else if (data.type === "link"  && (Date.now() - data.timeStamp < 6 * 3600000)){
             function urlify(text) {
                 var urlRegex = /(https?:\/\/[^\s]+)/g;
                 return text.replace(urlRegex, function(url) {
-                    return '<a href="' + url + '">' + url + '</a>';
+                    return '<a href="' + url + '"class="d-flex gap-1 align-items-center"><i class="bi bi-link-45deg"></i> ' + url + '</a>';
                 })
             }
             return `<div class="shadow-lg bg-white p-3">
@@ -95,7 +98,7 @@ export const todo = class {
                 </div>
             </div>`;
         }
-        else if (data.type === "note"){
+        else if (data.type === "note" && (Date.now() - data.timeStamp < 2628000000)){
             let textArray = data.text.split("<br>");
 
             let header = textArray.shift();
@@ -108,7 +111,24 @@ export const todo = class {
                 <code>${paragraph}</code>
             </div>`;
         }
-        else return `<div class="shadow-lg bg-white p-3"><h6>Something went wrong</h6></div>`
+        //working on it
+        else if (data.type === "img"){
+            return `<div class="bg-white shadow-lg img-doc d-flex flex-column flex-md-row my-2">
+                        <img src="https://picsum.photos/200/" alt="" srcset="" class="flex-grow-1">
+                        <div class="p-3 w-100 d-flex align-items-start justify-content-between">
+                            <code class="flex-grow-1">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis alias laboriosam cum odit perspiciatis ad atque eum! Itaque consectetur et ex aliquam impedit adipisci? Inventore voluptates alias itaque quam aut labore sunt facere fugit? Labore nihil a eaque pariatur debitis, aspernatur ex ratione cumque earum officia fugit hic, accusantium magnam!
+                            </code>
+                            <div class="h-100 float-end w-auto d-flex flex-column justify-content-center justify-content-md-start">
+                                <a class="btn" download="https://picsum.photos/200/">
+                                    <i class="bi bi-download onpageI"></i></a>
+                                <button class="btn" onclick="navigator.clipboard.writeText('${data.text}')">
+                                    <i class="bi bi-clipboard onpageI"></i></button>
+                            </div>
+                        </div>
+                    </div>`
+        } 
+        else return ``
     }
 
 
@@ -118,7 +138,7 @@ export const todo = class {
 
 
     deleteTodo(ID) {
-        let docRef = doc(this.DB, "NotionFeed" ,ID)
+        let docRef = doc(this.DB, this.userCollection ,ID)
         updateDoc(docRef, {
           done: true
         })
