@@ -26,19 +26,26 @@
     </div>
     <div id="loginPAGE" class="container flex-column gap-2 mt-5" style="display: none;">
         <h3 class=" fw-bold text-center">Authentication Required</h3>
-        <form action="" id="loginFORM">
+        <form action="" id="theAuthForm">
             <div class="d-flex flex-column gap-3 align-items-center">
                 <input type="email" name="email" id="" placeholder="Email"required autocomplete="off">
                 <input type="password" name="password" id="" placeholder="Password" required autocomplete="off">
-                <button class="btn btn-dark w-50">
-                    Login <i class="bi bi-chevron-right fs-6"></i>
-                </button>
+                <div class="w-100 d-flex gap-2 justify-content-between align-items-center">
+                    <button id="signFORM" type="submit" class="btn btn-dark">
+                        Create <i class="bi bi-plus-lg fs-6"></i>
+                    </button>
+                    <h6>OR</h6>
+                    <button id="loginFORM" type="submit" class="btn btn-dark">
+                        Login <i class="bi bi-chevron-right fs-6"></i>
+                    </button>
+                </div>
             </div>
         </form>
+        <p id="authError" class="text-center text-danger"></p>
     </div>
     <div id="container" class="container flex-column gap-2 mb-5" style="display: none;">
     </div>
-            <form id="textInput">
+            <form id="textInput" style="display: none;">
                 <input type="radio" value="link" name="choice" class="d-none"  checked="checked">
                 <div class="d-flex flex-column gap-2">
                 <div class="d-flex gap-2 justify-content-start choice">

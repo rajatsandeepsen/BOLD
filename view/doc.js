@@ -64,7 +64,7 @@ export const todo = class {
 
     displayTodo() {
         let container = document.getElementById("container");
-        // container.innerHTML = "";
+        container.innerHTML = "";
         this.todoArray.forEach((data) => {
             container.innerHTML += this.TempleteTodo(data);
         })

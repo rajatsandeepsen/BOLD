@@ -36,15 +36,17 @@ function deleteTodo(id) {
 // let deleteTodo = () => {};
 
 onAuthStateChanged(auth, user => {
+    theAuthForm
+    document.querySelector('#loginPAGE p').innerHTML = "";
     if (user) {
         login.style.display = "none";
         container.style.display = "flex";
         textInput.style.display = "block";
-        
+
         import('./doc.js')
         .then((res) => { 
                 todoObj = new res.todo(DB, user.uid)
-                
+                // passing user id  
             })
         .catch(err => console.log(err.message))
 
@@ -80,19 +82,41 @@ onAuthStateChanged(auth, user => {
         container.style.display = "none";
         textInput.style.display = "none";
         const loginFORM = document.getElementById("loginFORM");
+        const theAuthForm = document.getElementById("theAuthForm");
+        const signFORM = document.getElementById("signFORM");
 
         // dynamic import 
-        import('https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js').then(({ signInWithEmailAndPassword }) => {
-            loginFORM.addEventListener('submit', (e) => {
+        import('https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js').then(({ signInWithEmailAndPassword, createUserWithEmailAndPassword }) => {
+            loginFORM.addEventListener('click', (e) => {
                 e.preventDefault();
-                let email = loginFORM.email.value;
-                let password = loginFORM.password.value;
+                let email = theAuthForm.email.value;
+                let password = theAuthForm.password.value;
 
                 signInWithEmailAndPassword(auth, email, password).then((cred) => {
                     console.log('user logined in:', cred.user);
+                    theAuthForm.reset()
                 })
                 .catch((err) => {
+                    const authError = document.getElementById('authError')
+                    authError.innerHTML = err
                     console.log(err);
+                    theAuthForm.password.value = "";
+                })
+            })
+            signFORM.addEventListener('click', (e) => {
+                e.preventDefault();
+                let email = theAuthForm.email.value;
+                let password = theAuthForm.password.value;
+
+                createUserWithEmailAndPassword(auth, email, password).then((cred) => {
+                    console.log('user logined in:', cred.user);
+                    theAuthForm.reset()
+                })
+                .catch((err) => {
+                    const authError = document.getElementById('authError')
+                    authError.innerHTML = err
+                    console.log(err);
+                    theAuthForm.password.value = "";
                 })
             })
         })
