@@ -45,9 +45,32 @@ module.exports = {
    output: {
     filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     publicPath: '',
    },
 
 };
 ```
 
 9. `npm run start` for devepolment temp build
+
+
+10. webpack5-automatic-publicpath-is-not-supported-in-this-browser (solved)
+
+```
+output: {
+  publicPath: '',
+}
+```
+
+11. webpack production ready
+
+`webpack --mode production`
+
+```
+"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack",
+		"start": "webpack serve",
+		"production" : "webpack --mode production"
+	},
+```

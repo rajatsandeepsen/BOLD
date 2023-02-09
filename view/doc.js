@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, query, orderBy, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore-lite.js";
+import { collection, addDoc, getDocs, query, orderBy, doc, updateDoc } from "firebase/firestore";
 let DBclone, TODOclone
 export const todo = class {
     todoArray = [];
@@ -6,7 +6,7 @@ export const todo = class {
     DB;
     qry;
     userCollection;
-    constructor(DB, UID) {
+    constructor (DB, UID) {
         this.DB = DBclone = DB;
         this.userCollection = UID;
         this.TODO = TODOclone = collection(DB, UID);
@@ -21,7 +21,7 @@ export const todo = class {
             const querySnapshot = await getDocs(this.qry);
             querySnapshot.forEach((doc) => {
                 //here destructuring is used to add id to the object
-                this.todoArray.push({...doc.data(),id: doc.id})
+                this.todoArray.push({ ...doc.data(), id: doc.id })
             })
             this.displayTodo()
             const deleteBtn = document.querySelectorAll('.delete');
@@ -38,25 +38,25 @@ export const todo = class {
 
 
 
-    addTodo(value,type) {
+    addTodo(value, type) {
         let X
         if (type == "todo")
-            X = {type: type, text: value, timeStamp: Date.now(), done: false}
+            X = { type: type, text: value, timeStamp: Date.now(), done: false }
 
-        else if (type == "note"){
+        else if (type == "note") {
             let textArray = value.split("\n");
             let paragraph = textArray.join("<br>");
-            X = {type: type, text: paragraph, timeStamp: Date.now()}
+            X = { type: type, text: paragraph, timeStamp: Date.now() }
         }
 
-        else X = {type: type, text: value, timeStamp: Date.now()}
+        else X = { type: type, text: value, timeStamp: Date.now() }
 
         addDoc(this.TODO, X)
-        .then((docRef) => {
-            this.refresh()
-        }).catch((error) => {
-            console.error("Error adding document: ", error);
-        })
+            .then((docRef) => {
+                this.refresh()
+            }).catch((error) => {
+                console.error("Error adding document: ", error);
+            })
     }
 
 
@@ -72,8 +72,8 @@ export const todo = class {
 
 
 
-    TempleteTodo(data){
-        if (data.type === "todo" && ((Date.now() - data.timeStamp < 86400000) || !data.done )){
+    TempleteTodo(data) {
+        if (data.type === "todo" && ((Date.now() - data.timeStamp < 86400000) || !data.done)) {
 
 
             let icon = data.done ? "bi-check-square-fill" : "bi-square";
@@ -84,10 +84,10 @@ export const todo = class {
                 <h6 class="${text}">${data.text}</h6>
             </div>`;
         }
-        else if (data.type === "link"  && (Date.now() - data.timeStamp < 6 * 3600000)){
+        else if (data.type === "link" && (Date.now() - data.timeStamp < 6 * 3600000)) {
             function urlify(text) {
                 var urlRegex = /(https?:\/\/[^\s]+)/g;
-                return text.replace(urlRegex, function(url) {
+                return text.replace(urlRegex, function (url) {
                     return '<a href="' + url + '"class="d-flex gap-1 align-items-center"><i class="bi bi-link-45deg"></i> ' + url + '</a>';
                 })
             }
@@ -98,7 +98,7 @@ export const todo = class {
                 </div>
             </div>`;
         }
-        else if (data.type === "note" && (Date.now() - data.timeStamp < 2628000000)){
+        else if (data.type === "note" && (Date.now() - data.timeStamp < 2628000000)) {
             let textArray = data.text.split("<br>");
 
             let header = textArray.shift();
@@ -112,7 +112,7 @@ export const todo = class {
             </div>`;
         }
         //working on it
-        else if (data.type === "img"){
+        else if (data.type === "img") {
             return `<div class="bg-white shadow-lg img-doc d-flex flex-column flex-md-row my-2">
                         <img src="https://picsum.photos/200/" alt="" srcset="" class="flex-grow-1">
                         <div class="p-3 w-100 d-flex align-items-start justify-content-between">
@@ -127,28 +127,28 @@ export const todo = class {
                             </div>
                         </div>
                     </div>`
-        } 
+        }
         else return ``
     }
 
 
     static copytext(text) {
-         navigator.clipboard.writeText(text);
+        navigator.clipboard.writeText(text);
     }
 
 
     deleteTodo(ID) {
-        let docRef = doc(this.DB, this.userCollection ,ID)
+        let docRef = doc(this.DB, this.userCollection, ID)
         updateDoc(docRef, {
-          done: true
+            done: true
         })
-        .then(() => {
-            this.refresh();
-        })
-        .catch((error) => {
-            console.error("Error updating document: ", error);
-        })
+            .then(() => {
+                this.refresh();
+            })
+            .catch((error) => {
+                console.error("Error updating document: ", error);
+            })
     }
-    
+
 }
 
