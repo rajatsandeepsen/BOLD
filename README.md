@@ -56,8 +56,8 @@ module.exports = {
 
 10. webpack5-automatic-publicpath-is-not-supported-in-this-browser (solved)
 
-```output: {
+```
+output: {
   publicPath: '',
-  ...
 }
 ```
