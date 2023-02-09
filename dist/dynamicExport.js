@@ -50,13 +50,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./view/index.js":
-/*!***********************!*\
-  !*** ./view/index.js ***!
-  \***********************/
+/***/ "./view/dynamicExport.js":
+/*!*******************************!*\
+  !*** ./view/dynamicExport.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n\r\n\r\n\r\nconst firebaseConfig = {\r\n  apiKey: \"AIzaSyAOO0ue-iq4WCZLPzj6ETL2vveGkhg9jzc\",\r\n  authDomain: \"notion-clone-278d2.firebaseapp.com\",\r\n  projectId: \"notion-clone-278d2\",\r\n  storageBucket: \"notion-clone-278d2.appspot.com\",\r\n  messagingSenderId: \"124076968705\",\r\n  appId: \"1:124076968705:web:7f0d8da3ceed9b89a4e900\"\r\n};\r\n\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\n// import { getFirestore, collection } from \"firebase/firestore\";\r\n// const DB  = getFirestore();\r\n \r\n// import { getStorage } from \"firebase/storage\";\r\n// const storage = getStorage();\r\n\r\n// firebase auth\r\n\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\n\r\nconst login = document.getElementById(\"loginPAGE\");\r\nconst container = document.getElementById(\"container\");\r\n\r\n(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, user => {\r\n    if (user) {\r\n        console.log(\"user logged in\")\r\n        login.style.display = \"none\";\r\n        container.style.display = \"flex\";\r\n        alert(\"import success\")\r\n        Promise.all(/*! import() */[__webpack_require__.e(\"vendors-node_modules_firebase_firestore_dist_esm_index_esm_js\"), __webpack_require__.e(\"view_doc_js\")]).then(__webpack_require__.bind(__webpack_require__, /*! ./doc.js */ \"./view/doc.js\"))\r\n              .then(({ default: todo }) => { \r\n                alert(\"import success\")\r\n                console.log(\"import success\")\r\n                new todo();\r\n            })\r\n\r\n        Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\")).then(({ signOut }) => {\r\n            const logOUT = document.getElementById(\"logOUT\");\r\n            logOUT.addEventListener('click', (e) => {\r\n                e.preventDefault();\r\n\r\n                signOut(auth).then(() => {\r\n                    console.log('user signed out')\r\n                })\r\n                .catch(err => {\r\n                    console.log(err.message)\r\n                })\r\n            })\r\n        })\r\n    }\r\n    else {\r\n        console.log(\"user not logged in\")\r\n        login.style.display = \"flex\";\r\n        container.style.display = \"none\";\r\n        const loginFORM = document.getElementById(\"loginFORM\");\r\n\r\n        // dynamic import \r\n        Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\")).then(({ signInWithEmailAndPassword }) => {\r\n            loginFORM.addEventListener('submit', (e) => {\r\n                e.preventDefault();\r\n                let email = loginFORM.email.value;\r\n                let password = loginFORM.password.value;\r\n\r\n                signInWithEmailAndPassword(auth, email, password).then((cred) => {\r\n                    console.log('user logined in:', cred.user);\r\n                })\r\n                .catch((err) => {\r\n                    console.log(err);\r\n                })\r\n            })\r\n        })\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack://notion-clone/./view/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"createUserWithEmailAndPassword\": () => (/* reexport safe */ firebase_auth__WEBPACK_IMPORTED_MODULE_0__.createUserWithEmailAndPassword),\n/* harmony export */   \"getAuth\": () => (/* reexport safe */ firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth),\n/* harmony export */   \"onAuthStateChanged\": () => (/* reexport safe */ firebase_auth__WEBPACK_IMPORTED_MODULE_0__.onAuthStateChanged),\n/* harmony export */   \"signInWithEmailAndPassword\": () => (/* reexport safe */ firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword),\n/* harmony export */   \"signOut\": () => (/* reexport safe */ firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signOut)\n/* harmony export */ });\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n\n\n\n\n//# sourceURL=webpack://notion-clone/./view/dynamicExport.js?");
 
 /***/ }),
 
@@ -87,16 +87,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"LogLevel\": () => (/* binding */ LogLevel),\n/* harmony export */   \"Logger\": () => (/* binding */ Logger),\n/* harmony export */   \"setLogLevel\": () => (/* binding */ setLogLevel),\n/* harmony export */   \"setUserLogHandler\": () => (/* binding */ setUserLogHandler)\n/* harmony export */ });\n/**\r\n * @license\r\n * Copyright 2017 Google LLC\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n/**\r\n * A container for all of the Logger instances\r\n */\r\nconst instances = [];\r\n/**\r\n * The JS SDK supports 5 log levels and also allows a user the ability to\r\n * silence the logs altogether.\r\n *\r\n * The order is a follows:\r\n * DEBUG < VERBOSE < INFO < WARN < ERROR\r\n *\r\n * All of the log types above the current log level will be captured (i.e. if\r\n * you set the log level to `INFO`, errors will still be logged, but `DEBUG` and\r\n * `VERBOSE` logs will not)\r\n */\r\nvar LogLevel;\r\n(function (LogLevel) {\r\n    LogLevel[LogLevel[\"DEBUG\"] = 0] = \"DEBUG\";\r\n    LogLevel[LogLevel[\"VERBOSE\"] = 1] = \"VERBOSE\";\r\n    LogLevel[LogLevel[\"INFO\"] = 2] = \"INFO\";\r\n    LogLevel[LogLevel[\"WARN\"] = 3] = \"WARN\";\r\n    LogLevel[LogLevel[\"ERROR\"] = 4] = \"ERROR\";\r\n    LogLevel[LogLevel[\"SILENT\"] = 5] = \"SILENT\";\r\n})(LogLevel || (LogLevel = {}));\r\nconst levelStringToEnum = {\r\n    'debug': LogLevel.DEBUG,\r\n    'verbose': LogLevel.VERBOSE,\r\n    'info': LogLevel.INFO,\r\n    'warn': LogLevel.WARN,\r\n    'error': LogLevel.ERROR,\r\n    'silent': LogLevel.SILENT\r\n};\r\n/**\r\n * The default log level\r\n */\r\nconst defaultLogLevel = LogLevel.INFO;\r\n/**\r\n * By default, `console.debug` is not displayed in the developer console (in\r\n * chrome). To avoid forcing users to have to opt-in to these logs twice\r\n * (i.e. once for firebase, and once in the console), we are sending `DEBUG`\r\n * logs to the `console.log` function.\r\n */\r\nconst ConsoleMethod = {\r\n    [LogLevel.DEBUG]: 'log',\r\n    [LogLevel.VERBOSE]: 'log',\r\n    [LogLevel.INFO]: 'info',\r\n    [LogLevel.WARN]: 'warn',\r\n    [LogLevel.ERROR]: 'error'\r\n};\r\n/**\r\n * The default log handler will forward DEBUG, VERBOSE, INFO, WARN, and ERROR\r\n * messages on to their corresponding console counterparts (if the log method\r\n * is supported by the current log level)\r\n */\r\nconst defaultLogHandler = (instance, logType, ...args) => {\r\n    if (logType < instance.logLevel) {\r\n        return;\r\n    }\r\n    const now = new Date().toISOString();\r\n    const method = ConsoleMethod[logType];\r\n    if (method) {\r\n        console[method](`[${now}]  ${instance.name}:`, ...args);\r\n    }\r\n    else {\r\n        throw new Error(`Attempted to log a message with an invalid logType (value: ${logType})`);\r\n    }\r\n};\r\nclass Logger {\r\n    /**\r\n     * Gives you an instance of a Logger to capture messages according to\r\n     * Firebase's logging scheme.\r\n     *\r\n     * @param name The name that the logs will be associated with\r\n     */\r\n    constructor(name) {\r\n        this.name = name;\r\n        /**\r\n         * The log level of the given Logger instance.\r\n         */\r\n        this._logLevel = defaultLogLevel;\r\n        /**\r\n         * The main (internal) log handler for the Logger instance.\r\n         * Can be set to a new function in internal package code but not by user.\r\n         */\r\n        this._logHandler = defaultLogHandler;\r\n        /**\r\n         * The optional, additional, user-defined log handler for the Logger instance.\r\n         */\r\n        this._userLogHandler = null;\r\n        /**\r\n         * Capture the current instance for later use\r\n         */\r\n        instances.push(this);\r\n    }\r\n    get logLevel() {\r\n        return this._logLevel;\r\n    }\r\n    set logLevel(val) {\r\n        if (!(val in LogLevel)) {\r\n            throw new TypeError(`Invalid value \"${val}\" assigned to \\`logLevel\\``);\r\n        }\r\n        this._logLevel = val;\r\n    }\r\n    // Workaround for setter/getter having to be the same type.\r\n    setLogLevel(val) {\r\n        this._logLevel = typeof val === 'string' ? levelStringToEnum[val] : val;\r\n    }\r\n    get logHandler() {\r\n        return this._logHandler;\r\n    }\r\n    set logHandler(val) {\r\n        if (typeof val !== 'function') {\r\n            throw new TypeError('Value assigned to `logHandler` must be a function');\r\n        }\r\n        this._logHandler = val;\r\n    }\r\n    get userLogHandler() {\r\n        return this._userLogHandler;\r\n    }\r\n    set userLogHandler(val) {\r\n        this._userLogHandler = val;\r\n    }\r\n    /**\r\n     * The functions below are all based on the `console` interface\r\n     */\r\n    debug(...args) {\r\n        this._userLogHandler && this._userLogHandler(this, LogLevel.DEBUG, ...args);\r\n        this._logHandler(this, LogLevel.DEBUG, ...args);\r\n    }\r\n    log(...args) {\r\n        this._userLogHandler &&\r\n            this._userLogHandler(this, LogLevel.VERBOSE, ...args);\r\n        this._logHandler(this, LogLevel.VERBOSE, ...args);\r\n    }\r\n    info(...args) {\r\n        this._userLogHandler && this._userLogHandler(this, LogLevel.INFO, ...args);\r\n        this._logHandler(this, LogLevel.INFO, ...args);\r\n    }\r\n    warn(...args) {\r\n        this._userLogHandler && this._userLogHandler(this, LogLevel.WARN, ...args);\r\n        this._logHandler(this, LogLevel.WARN, ...args);\r\n    }\r\n    error(...args) {\r\n        this._userLogHandler && this._userLogHandler(this, LogLevel.ERROR, ...args);\r\n        this._logHandler(this, LogLevel.ERROR, ...args);\r\n    }\r\n}\r\nfunction setLogLevel(level) {\r\n    instances.forEach(inst => {\r\n        inst.setLogLevel(level);\r\n    });\r\n}\r\nfunction setUserLogHandler(logCallback, options) {\r\n    for (const instance of instances) {\r\n        let customLogLevel = null;\r\n        if (options && options.level) {\r\n            customLogLevel = levelStringToEnum[options.level];\r\n        }\r\n        if (logCallback === null) {\r\n            instance.userLogHandler = null;\r\n        }\r\n        else {\r\n            instance.userLogHandler = (instance, level, ...args) => {\r\n                const message = args\r\n                    .map(arg => {\r\n                    if (arg == null) {\r\n                        return null;\r\n                    }\r\n                    else if (typeof arg === 'string') {\r\n                        return arg;\r\n                    }\r\n                    else if (typeof arg === 'number' || typeof arg === 'boolean') {\r\n                        return arg.toString();\r\n                    }\r\n                    else if (arg instanceof Error) {\r\n                        return arg.message;\r\n                    }\r\n                    else {\r\n                        try {\r\n                            return JSON.stringify(arg);\r\n                        }\r\n                        catch (ignored) {\r\n                            return null;\r\n                        }\r\n                    }\r\n                })\r\n                    .filter(arg => arg)\r\n                    .join(' ');\r\n                if (level >= (customLogLevel !== null && customLogLevel !== void 0 ? customLogLevel : instance.logLevel)) {\r\n                    logCallback({\r\n                        level: LogLevel[level].toLowerCase(),\r\n                        message,\r\n                        args,\r\n                        type: instance.name\r\n                    });\r\n                }\r\n            };\r\n        }\r\n    }\r\n}\n\n\n//# sourceMappingURL=index.esm2017.js.map\n\n\n//# sourceURL=webpack://notion-clone/./node_modules/@firebase/logger/dist/esm/index.esm2017.js?");
-
-/***/ }),
-
-/***/ "./node_modules/firebase/app/dist/esm/index.esm.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/firebase/app/dist/esm/index.esm.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"FirebaseError\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.FirebaseError),\n/* harmony export */   \"SDK_VERSION\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.SDK_VERSION),\n/* harmony export */   \"_DEFAULT_ENTRY_NAME\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._DEFAULT_ENTRY_NAME),\n/* harmony export */   \"_addComponent\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._addComponent),\n/* harmony export */   \"_addOrOverwriteComponent\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._addOrOverwriteComponent),\n/* harmony export */   \"_apps\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._apps),\n/* harmony export */   \"_clearComponents\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._clearComponents),\n/* harmony export */   \"_components\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._components),\n/* harmony export */   \"_getProvider\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._getProvider),\n/* harmony export */   \"_registerComponent\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._registerComponent),\n/* harmony export */   \"_removeServiceInstance\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__._removeServiceInstance),\n/* harmony export */   \"deleteApp\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.deleteApp),\n/* harmony export */   \"getApp\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.getApp),\n/* harmony export */   \"getApps\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.getApps),\n/* harmony export */   \"initializeApp\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp),\n/* harmony export */   \"onLog\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.onLog),\n/* harmony export */   \"registerVersion\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.registerVersion),\n/* harmony export */   \"setLogLevel\": () => (/* reexport safe */ _firebase_app__WEBPACK_IMPORTED_MODULE_0__.setLogLevel)\n/* harmony export */ });\n/* harmony import */ var _firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @firebase/app */ \"./node_modules/@firebase/app/dist/esm/index.esm2017.js\");\n\n\n\nvar name = \"firebase\";\nvar version = \"9.16.0\";\n\n/**\r\n * @license\r\n * Copyright 2020 Google LLC\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n(0,_firebase_app__WEBPACK_IMPORTED_MODULE_0__.registerVersion)(name, version, 'app');\n//# sourceMappingURL=index.esm.js.map\n\n\n//# sourceURL=webpack://notion-clone/./node_modules/firebase/app/dist/esm/index.esm.js?");
 
 /***/ }),
 
@@ -156,9 +146,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -169,28 +156,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/ensure chunk */
-/******/ 	(() => {
-/******/ 		__webpack_require__.f = {};
-/******/ 		// This file contains only the entry chunk.
-/******/ 		// The chunk loading function for additional chunks
-/******/ 		__webpack_require__.e = (chunkId) => {
-/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
-/******/ 				__webpack_require__.f[key](chunkId, promises);
-/******/ 				return promises;
-/******/ 			}, []));
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/get javascript chunk filename */
-/******/ 	(() => {
-/******/ 		// This function allow to reference async chunks
-/******/ 		__webpack_require__.u = (chunkId) => {
-/******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".bundle.js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -211,51 +176,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/load script */
-/******/ 	(() => {
-/******/ 		var inProgress = {};
-/******/ 		var dataWebpackPrefix = "notion-clone:";
-/******/ 		// loadScript function to load a script via script tag
-/******/ 		__webpack_require__.l = (url, done, key, chunkId) => {
-/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
-/******/ 			var script, needAttach;
-/******/ 			if(key !== undefined) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				for(var i = 0; i < scripts.length; i++) {
-/******/ 					var s = scripts[i];
-/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
-/******/ 				}
-/******/ 			}
-/******/ 			if(!script) {
-/******/ 				needAttach = true;
-/******/ 				script = document.createElement('script');
-/******/ 		
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
-/******/ 				script.src = url;
-/******/ 			}
-/******/ 			inProgress[url] = [done];
-/******/ 			var onScriptComplete = (prev, event) => {
-/******/ 				// avoid mem leaks in IE.
-/******/ 				script.onerror = script.onload = null;
-/******/ 				clearTimeout(timeout);
-/******/ 				var doneFns = inProgress[url];
-/******/ 				delete inProgress[url];
-/******/ 				script.parentNode && script.parentNode.removeChild(script);
-/******/ 				doneFns && doneFns.forEach((fn) => (fn(event)));
-/******/ 				if(prev) return prev(event);
-/******/ 			};
-/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
-/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
-/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
-/******/ 			needAttach && document.head.appendChild(script);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -267,122 +187,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"index": 0
-/******/ 		};
-/******/ 		
-/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
-/******/ 				// JSONP chunk loading for javascript
-/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
-/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
-/******/ 		
-/******/ 					// a Promise means "currently loading".
-/******/ 					if(installedChunkData) {
-/******/ 						promises.push(installedChunkData[2]);
-/******/ 					} else {
-/******/ 						if(true) { // all chunks have JS
-/******/ 							// setup Promise in chunk cache
-/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
-/******/ 							promises.push(installedChunkData[2] = promise);
-/******/ 		
-/******/ 							// start chunk loading
-/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
-/******/ 							// create error before stack unwound to get useful stacktrace later
-/******/ 							var error = new Error();
-/******/ 							var loadingEnded = (event) => {
-/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
-/******/ 									installedChunkData = installedChunks[chunkId];
-/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
-/******/ 									if(installedChunkData) {
-/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 										var realSrc = event && event.target && event.target.src;
-/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 										error.name = 'ChunkLoadError';
-/******/ 										error.type = errorType;
-/******/ 										error.request = realSrc;
-/******/ 										installedChunkData[1](error);
-/******/ 									}
-/******/ 								}
-/******/ 							};
-/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
-/******/ 						} else installedChunks[chunkId] = 0;
-/******/ 					}
-/******/ 				}
-/******/ 		};
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		// no on chunks loaded
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 		
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunknotion_clone"] = self["webpackChunknotion_clone"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
 /************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./view/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./view/dynamicExport.js");
 /******/ 	
 /******/ })()
 ;
