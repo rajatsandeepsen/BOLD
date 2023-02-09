@@ -61,3 +61,16 @@ output: {
   publicPath: '',
 }
 ```
+
+11. webpack production ready
+
+`webpack --mode production`
+
+```
+"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack",
+		"start": "webpack serve",
+		"production" : "webpack --mode production"
+	},
+```
