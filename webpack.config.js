@@ -9,6 +9,7 @@ module.exports = {
     dynamicExport: './view/dynamicExport.js',
     main: './view/main.js',
     firestore: 'firebase/firestore',
+    app: 'firebase/app',
     auth: 'firebase/auth'
   },
   output: {
