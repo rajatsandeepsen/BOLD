@@ -207,7 +207,7 @@ input:required:valid {
     border: solid var(--dark) 1px;
     // background-color: var(--grey);s
 }
-form button {
+#textInput button:not(.label){
     color: var(--white);
     height: var(--boxer);
     width: var(--boxer);
@@ -217,7 +217,7 @@ form button {
     }   
 }
  @media  (min-width: 500px) {
-    form button {
+#textInput  button {
         width: calc(var(--boxer) * 3);
     }
  }
@@ -241,6 +241,7 @@ h5,h6 {
             cursor: pointer;
             z-index: 90;
             background: var(--white);
+            color: var(--dark);
 
             & i {
                 font-size: 1.4rem;
