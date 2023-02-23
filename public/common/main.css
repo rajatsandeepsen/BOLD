@@ -71,6 +71,7 @@ code {
 
 html, body {
   scroll-behavior: smooth;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 html {
